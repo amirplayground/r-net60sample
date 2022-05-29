@@ -35,7 +35,26 @@ jobs:
       with:
         repository: ''
 
+#===============================================================================
+    # Build the application
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.*.*
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore #configuration Release
+      working-directory: ./
+    #- name: Test
+      #run: dotnet test #--no-build --verbosity normal
+      #working-directory: ./
+
+#===============================================================================
+    # OPTIONAL: If build output is more than a one file
+    # Zipping all the code together into single file 
     - run: zip -r veracode-scan-target.zip ./
+#===============================================================================
 
     # download the Veracode Static Analysis Pipeline scan jar
     - run: curl --silent --show-error --fail -O https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
