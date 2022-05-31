@@ -37,7 +37,7 @@ jobs:
 
 #===============================================================================
     # Build the application
-    - name: Setup .NET
+    - name: Setup dotNET
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.*.*
